@@ -9,31 +9,31 @@ private:
     double real;
     double imaginary;
 public:
-    ComplexNum(double real, double imaginary) : real(real), imaginary(imaginary) {}
+    ComplexNum(double real = 0.0, double imaginary = 0.0) : real(real), imaginary(imaginary) {}
 
-    double getRealPart();
+    double getRealPart() const;
 
-    double getImaginaryPart();
+    double getImaginaryPart() const;
 
     void setRealPart(double r);
 
     void setImaginaryPart(double i);
 
-    ComplexNum operator+(ComplexNum& other);
+    ComplexNum operator+(const ComplexNum& other) const;
 
-    ComplexNum operator-(ComplexNum& other);
+    ComplexNum operator-(const ComplexNum& other) const;
 
-    ComplexNum operator*(ComplexNum& other);
+    ComplexNum operator*(const ComplexNum& other) const;
 
-    ComplexNum operator/(ComplexNum& other);
+    ComplexNum operator/(const ComplexNum& other) const;
 
-    bool operator==(ComplexNum& other);
+    bool operator==(const ComplexNum& other) const;
 
-    bool operator==(double num);
+    bool operator==(double num) const;
 
-    ComplexNum pow1(int n);
+    ComplexNum pow(int n) const;
 
-    double module();
+    double module() const;
 
     void display();
 };

@@ -13,6 +13,7 @@ namespace UnitTest
 	public:
 		
 		TEST_METHOD(TestgetRealPart)
+
 		{
 			ComplexNum z1(4, -7);
 			double real = z1.getRealPart();
@@ -44,11 +45,11 @@ namespace UnitTest
 		TEST_METHOD(TestMethodOperators)
 		{
 			ComplexNum z1(4, -3), z2(4, -3), z3(1, 5);
-			double num = 5.0;
+			double num = 1;
 			Assert::IsTrue(z1 == z2);
 			Assert::IsFalse(z1 == z3);
-			Assert::IsTrue(z1 == num);
-			Assert::IsFalse(z3 == num);
+			Assert::IsFalse(z1 == num);
+			Assert::IsTrue(z3 == num);
 
 			ComplexNum sum = z1 + z2, ans1(8, -6);
 			Assert::AreEqual(8.0, sum.getRealPart());
@@ -70,10 +71,9 @@ namespace UnitTest
 		TEST_METHOD(TestMethodPow)
 		{
 			ComplexNum z1(3, 4);
-			ComplexNum answer = z1.pow1(3);
-			Assert::AreEqual(-117.0, round(answer.getRealPart() * 100.0) / 100.0);
-			Assert::AreEqual(44.0, round(answer.getImaginaryPart() * 100.0) / 100.0);
-
+			ComplexNum answer = z1.pow(3);
+			Assert::IsTrue(fabs(-117.0 - answer.getRealPart()) < 1e-7);
+			Assert::IsTrue(fabs(44.0 - answer.getImaginaryPart()) < 1e-7);
 		}
 
 	};

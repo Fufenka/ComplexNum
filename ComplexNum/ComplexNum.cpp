@@ -1,10 +1,10 @@
 ﻿#include "ComplexNum.h"
 
-double ComplexNum::getRealPart() {
+double ComplexNum::getRealPart() const{
 	return real;
 }
 
-double ComplexNum::getImaginaryPart() {
+double ComplexNum::getImaginaryPart() const{
 	return imaginary;
 }
 
@@ -16,36 +16,38 @@ void ComplexNum::setImaginaryPart(double i) {
 	imaginary = i;
 }
 
-ComplexNum ComplexNum::operator+(ComplexNum& other) {
+ComplexNum ComplexNum::operator+(const ComplexNum& other) const{
 	return ComplexNum(real + other.real, imaginary + other.imaginary);
 }
 
-ComplexNum ComplexNum::operator-(ComplexNum& other) {
+ComplexNum ComplexNum::operator-(const ComplexNum& other) const {
 	return ComplexNum(real - other.real, imaginary - other.imaginary);
 }
 
-ComplexNum ComplexNum::operator*(ComplexNum& other) {
+ComplexNum ComplexNum::operator*(const ComplexNum& other) const {
 	return ComplexNum(real * other.real - imaginary * other.imaginary,
 		real * other.imaginary + imaginary * other.real);
 }
 
-ComplexNum ComplexNum::operator/(ComplexNum& other) {
+ComplexNum ComplexNum::operator/(const ComplexNum& other) const {
 	double A = other.real * other.real + other.imaginary * other.imaginary;
+	if (A == 0.0) {
+		throw runtime_error("Division by zero");
+	}
 	double newReal = (real * other.real + imaginary * other.imaginary) / A;
 	double newImaginary = (imaginary * other.real - real * other.imaginary) / A;
 	return ComplexNum(newReal, newImaginary);
 }
 
-bool ComplexNum::operator==(ComplexNum& other) {
-	return (real == other.real && imaginary == other.imaginary);
+bool ComplexNum::operator==(const ComplexNum& other) const {
+	return (fabs(real - other.real) < 1e-7 && fabs(imaginary - other.imaginary) < 1e-7);
 }
 
-bool ComplexNum::operator==(double num) {
-	ComplexNum cnum = *this;
-	return cnum.module() == num;
+bool ComplexNum::operator==(double num) const {
+	return fabs(real - num) < 1e-7;
 }
 
-ComplexNum ComplexNum::pow1(int n) {
+ComplexNum ComplexNum::pow(int n) const {
 	double r = 1.0;
 
 	for (int i = 0; i < n; i++) {
@@ -60,7 +62,7 @@ ComplexNum ComplexNum::pow1(int n) {
 }
 
 
-double ComplexNum::module() {
+double ComplexNum::module() const {
 	return sqrt(real * real + imaginary * imaginary);
 }
 
