@@ -32,7 +32,7 @@ ComplexNum ComplexNum::operator*(const ComplexNum& other) const {
 ComplexNum ComplexNum::operator/(const ComplexNum& other) const {
 	double A = other.real * other.real + other.imaginary * other.imaginary;
 	if (A == 0.0) {
-		throw runtime_error("Division by zero");
+		throw std::runtime_error("Division by zero");
 	}
 	double newReal = (real * other.real + imaginary * other.imaginary) / A;
 	double newImaginary = (imaginary * other.real - real * other.imaginary) / A;
@@ -40,11 +40,11 @@ ComplexNum ComplexNum::operator/(const ComplexNum& other) const {
 }
 
 bool ComplexNum::operator==(const ComplexNum& other) const {
-	return (fabs(real - other.real) < 1e-7 && fabs(imaginary - other.imaginary) < 1e-7);
+	return (fabs(real - other.real) < E && fabs(imaginary - other.imaginary) < E);
 }
 
 bool ComplexNum::operator==(double num) const {
-	return fabs(real - num) < 1e-7;
+	return fabs(real - num) < E;
 }
 
 ComplexNum ComplexNum::pow(int n) const {
@@ -67,5 +67,5 @@ double ComplexNum::module() const {
 }
 
 void ComplexNum::display() {
-	cout << real << (imaginary < 0 ? " - " : " + ") << abs(imaginary) << "i" << std::endl;
+	std::cout << real << (imaginary < 0 ? " - " : " + ") << abs(imaginary) << "i" << std::endl;
 }

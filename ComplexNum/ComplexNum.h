@@ -2,7 +2,7 @@
 #define COMPLEXNUM_H
 #include <iostream>
 
-using namespace std;
+const double E = 1e-7;
 
 class ComplexNum {
 private:
