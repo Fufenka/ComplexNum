@@ -31,7 +31,7 @@ ComplexNum ComplexNum::operator*(const ComplexNum& other) const {
 
 ComplexNum ComplexNum::operator/(const ComplexNum& other) const {
 	double A = other.real * other.real + other.imaginary * other.imaginary;
-	if (fabs(A - 0.0 < E)) {
+	if (fabs(A - 0.0) < E) {
 		throw std::runtime_error("Division by zero");
 	}
 	double newReal = (real * other.real + imaginary * other.imaginary) / A;
